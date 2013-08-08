@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Unit2</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="question_01">What was the best-selling smartphone OS in 2006?</string>
+
+    <string-array name="answers">
+        <item>Android</item>
+        <item>Blackberry</item>
+        <item>iOS</item>
+        <item>Windows Mobile</item>
+    </string-array>
+
+    <string name="answer_01">Android</string>
+    <string name="answer_02">Blackberry</string>
+    <string name="answer_03">iOS</string>
+    <string name="answer_04">Windows Mobile</string>
+    <string name="title_activity_response">ResponseActivity</string>
+    
+
+</resources>

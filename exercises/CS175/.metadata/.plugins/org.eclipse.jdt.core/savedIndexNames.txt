@@ -1,0 +1,3 @@
+INDEX VERSION 1.126+D:\HEIG-VD\SU 2013\Mobile Programming\CS175\.metadata\.plugins\org.eclipse.jdt.core
+1375831279.index
+560868734.index
