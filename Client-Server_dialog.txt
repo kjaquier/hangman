@@ -1,0 +1,12 @@
+Client-Server dialog
+
+Client add parameter with a value in their httpRequest (GET).
+Server reponse is just Text, because of the HTTP protocol.
+So it means that client request the server, and then receive a string from the server.
+
+Parameter name		Client(value)					Server response
+----------------------------------------------------------------------------------------
+new					whatever						game-start
+letter				A->Z							number of attempts remaining, if 0,
+													response will be "game-over"
+
