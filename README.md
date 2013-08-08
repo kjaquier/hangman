@@ -5,8 +5,11 @@ Authors
 -------
 
 Aiswrya Bhaskaran
+
 Gaëtan Chevalley
+
 Aquila Khanam
+
 Kevin Jaquier
 
 Application
