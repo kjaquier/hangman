@@ -1,0 +1,157 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns='http://www.w3.org/1999/xhtml'><head><title>Unit 1</title> 
+    <meta name='copyright' content='Copyright ⓒ 2013 Cay S. Horstmann'/> 
+    <meta content='text/html; charset=UTF-8' http-equiv='content-type'/> 
+    <link type='text/css' rel='stylesheet' media='screen, projection, print' href='../../../Slidy2/styles/slidy.css'/> 
+    <link type='text/css' rel='stylesheet' media='screen, projection, print' href='../../../MySlidy/style.css'/> 
+    <style type='text/css'>div.slide { background-image: url("../../images/sjsu_logo.gif"); background-position: top right; background-repeat: no-repeat; }</style> 
+    <script src='../../../Slidy2/scripts/slidy.js' charset='utf-8' type='text/javascript'></script>
+    <script src='../../../MySlidy/slidy.js' charset='utf-8' type='text/javascript'></script> </head> 
+  <body><h1>Mobile Programming - Unit 1</h1>
+    <p class='fullimage'><img src='../../images/tower-hall.jpg' alt='Cover page image'/></p> 
+    <p><a href='http://horstmann.com/'>Cay S. Horstmann</a></p> 
+    <h1>Mobile Programming</h1> 
+		<p class='sideimage'><img src='smartphone-user-in-deutschland.jpg'/></p>
+    <ul><li>Learn to program on mobile platforms</li> 
+      <li>Learn to architect applications with mobile and web components</li>
+     </ul>
+    <h1>Why Mobile?</h1> 
+    <p class='sideimage'><img src='desktop.jpeg'/></p> 
+    <ul><li>The desktop is sooo 1990s</li> 
+      <li>Who needs a desktop or laptop in 2013?</li>
+			<li>Ok, you and me</li>
+			<li>99% of the population are content consumers, not content creators</li>
+			<li>Mobile form factors (phone, tablet) are convenient and sufficient for them</li></ul>
+	  <h1>Phases of Computing Technology</h1>
+    <p class='sideimage'><img src='mainframe.gif'/></p> 
+		<ol><li>Mainframes</li> 
+      <li>Minicomputers</li> 
+      <li>Workstations</li> 
+      <li>Personal computers</li> 
+      <li>Mobile </li> </ol>
+     <h1>Crossing the Chasm</h1>
+		 <p class='sideimage'><img src='TheInnovatorsDilemma.png'/></p> 
+		 <ul><li>New technologies replace existing ones in disruptive ways</li>
+			 <li>Initially, new technology is cheap but inferior</li>
+			 <li>Incumbents can't afford to compete in cheap market</li>
+			 <li>New technology improves and becomes good enough for most use cases</li>
+			 <li>Incumbents retreat to the profitable high-value end of the market</li>
+			 <li>New technology continues to improve and replaces incumbents</li></ul>
+		<h1>Topics</h1>
+    <p class='sideimage'><img src='Galaxy-note-S-pen.jpg'/></p>
+    <ul><li>Android programming</li>
+ 			<li>iOS</li>
+			<li>Server-side architecture</li>
+			<li>HTML5</li>
+			<li>Legal and societal aspects</li></ul>
+    <h1>Plagiarism</h1> 
+    <p class='sideimage'><img src='anti-plagiarism-poster-1.jpg'/></p>
+		<ul><li>When you submit work, it must be your intellectual creation</li>
+      <li>Can you copy and paste?</li>
+      <li>Ok if you attribute the source</li>
+			<li>You can discuss your work with others</li>
+			<li>You can post excerpts on a public discussion forum for critique</li>
+			<li>Don't email code to your “friend”—you don't know what the recipient will do with it</li>
+      <li>If I find plagiarism, I don't play Sherlock Holmes to find who wrote it—I report both</li></ul>
+    <h1>Your Responsibilities</h1> 
+    <p class='sideimage'><img src='Responsibility.jpg'/></p> 
+    <ul><li>Come to every class meeting </li>
+      <li>Work with your buddy on the labs. </li>
+      <li>Ask questions on Piazza</li>
+      <li>Propose and complete a project</li>
+    </ul>
+    <h1>Labs</h1> 
+    <p class='sideimage'><img src='../../images/lab.jpg'/></p> 
+    <ul><li>Bring your laptop to each class</li> 
+      <li>You will work with a buddy</li> 
+      <li>One of you writes code, the other types up answers</li> 
+      <li>Switch roles each lab (not each day)</li> 
+      <li>Submit lab work to Piazza</li> 
+    </ul>
+
+    <h1>Android Components</h1> 		
+    <ul><li>Operating system (Linux kernel)</li>		 			
+      <li>Hardware support: Camera, GPS, accelerometer</li> 			
+      <li>Telephony (voice and data) and Wifi</li> 			
+      <li>Custom 2D graphics library, OpenGL based 3D graphics</li> 			
+      <li>Dalvik VM</li> 			
+      <li>Application framework</li> 			
+      <li>Core apps: webkit-based browser, contacts, etc.</li> 			
+      <li>Media support, including H.264</li> 			
+      <li>SQLite database</li></ul> 
+    <h1>Android History</h1> 		
+    <ul><li>2003 - Android Inc. startup founded</li> 			
+      <li>2005 - Google buys Android Inc.</li> 			
+      <li>2008 - Android 1.0 released</li> 			
+      <li>2009 - Android 1.1, 1.5, 1.6, 2.0, 2.1</li> 			
+      <li>2010 - Android 2.2, 2.3</li> 			
+      <li>2011 - Android 3.0 (tablets only)</li> 			
+      <li>2011 - Android 4.0, unifies 2.3 and 3.0</li> 			
+      <li>2012 - Android 4.1, 4.2</li>
+      <li>Late 2013 - Android 4.3</li>
+    </ul>
+    <h1>Android and Java</h1> 		
+    <ul><li>Use Java to write Android applications</li> 			
+      <li>Subset of standard Java library, adapted from Apache Harmony</li> 			
+      <li>Application framework completely different from standard Java</li> 			
+      <li>Comparable to Blackberry (pre 10) programming</li> 			
+      <li>Unlike BlackBerry or Java ME phones, no Java Virtual Machine</li> 			
+      <li>Java class files converted to Dalvik VM</li> 			
+      <li>Each app runs in separate Linux process running a Dalvik instance</li> 			
+      <li>Dalvik machine code (DEX) optimized for small memory footprint</li></ul> 		
+    <h1>Android App Components</h1> 		
+    <ul><li>Activity: a UI screen</li> 			
+      <li>Service: lengthy job without UI, e.g. playing music</li> 			
+      <li>Broadcast receiver: reacts to system or app broadcasts</li> 			
+      <li>Content provider: make data available to other apps</li> 			
+      <li>A particular app can have components of some or all of these types</li> 			
+      <li>Each component is a Java class</li> 			
+      <li>No <code>main</code></li></ul> 			 
+    <h1>Android Development Toolkit (ADT)</h1> 		
+    <ul><li>Eclipse based IDE + command line tools</li> 			
+      <li>Runs on Linux, Mac, Windows</li> 			
+      <li>Uses regular Oracle JDK</li> 			
+      <li>Can plug into regular Eclipse</li> 			
+      <li>Easier to download the Eclipse + ADT bundle</li> 			
+      <li>Ok to have multiple versions of Eclipse—even on Windows</li> 			
+      <li>Supports multiple SDK levels</li> 			
+      <li>Android Virtual Device (AVD): Phone emulator</li></ul>			 		
+    <h1>Getting Started with Android Programming</h1> 		
+    <ol><li>Run <code>~/adt-bundle-linux-x86-date/eclipse/eclipse</code></li> 			
+      <li>Create <code>~/cs175/workspace</code> as your workspace</li> 			
+      <li>Select File -&gt; New Android Application</li> 			
+      <li>App name unit1, everything else default</li> 			
+      <li>Next, next, next...finish</li> 			
+      <li>Close welcome screen to see your project</li> 			
+      <li><code>src</code> is the Java source, <code>res</code> are the UI resources</li> 			
+      <li>What source files were generated by the wizard?</li> 			
+      <li>Where does the "Hello, World" message come from?</li> 			
+      <li>Where is the class <code>R</code> defined?</li></ol> 		
+    <h1>Running Your Program</h1> 		
+    <ol><li>Click on the green Run button or selecting Run from the Project menu. What happens?</li> 		
+      <li>When I did this, I had to first launch a device. Window → Android Virtual Device Manager → New. Set the AVD name to <code>nexuss</code>, select Nexus S, the first option in each of the next two boxes, and then click Ok.</li> 		
+      <li>In the Virtual Device Manager, select the Nexus S and click on Launch.</li> 		
+      <li>Run the program again. What happens?</li></ol> 		
+    <h1>Changing the Message</h1> 		
+    <p>We want to change the message to Hello, Dave.</p> 		
+    <ol><li>Does the application source file contain the string <code>"Hello, World"</code>?</li> 			
+      <li>Click on <code>activity_main.xml</code> in the Package Explorer and then on the <code>activity_main.xml</code> tab next to the Graphical Layout tab. What do you see?</li> 			
+      <li>What happens if you change <code>@string/hello_world</code> to <code>@string/hello_dave</code>?</li> 			
+      <li>Ok, that couldn't have worked. Look inside <code>values/strings.xml</code>. What do you see?</li> 			
+      <li>How do you change the message? Be sure to run the app.</li> 			
+      <li>Why do you think that the message wasn't stored directly in the <code>activity_main.xml</code> file?</li></ol> 		
+    <h1>An image</h1> 		
+    <p>We want to add an image. Here's one of Dave. <br/> 		<img src='http://moviesineedtosee.files.wordpress.com/2009/09/2001_dave.jpg'/></p> 		
+    <ol><li>Move the image to the <code>~/cs175/workspace/unit1/res/drawable-hdpi</code> directory. </li> 			
+      <li>Go to <code>activity_main.xml</code> and click on the Graphical Layout tab. Select Images &amp; Media and drag an ImageView on the screen. What happens when you drop it?</li> 			
+      <li>Hook up the 2001_dave.jpg file.</li> 			
+      <li>Try running the app. What happens?</li> 			
+      <li>Look in the Problems tab. What's the problem?</li> 			
+      <li>Double-click on the error message. What's really the problem?</li> 			
+      <li>Why shouldn't you fix it by editing R.java?</li> 			
+      <li>How can you fix the problem?</li> 			
+      <li>Now run the program. What happens?</li></ol> 		
+  </body>
+</html>

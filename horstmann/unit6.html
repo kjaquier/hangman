@@ -1,0 +1,157 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns='http://www.w3.org/1999/xhtml'><head><title>Unit 6</title> 
+    <meta name='copyright' content='Copyright ⓒ 2013 Cay S. Horstmann'/> 
+    <meta content='text/html; charset=UTF-8' http-equiv='content-type'/> 
+    <link type='text/css' rel='stylesheet' media='screen, projection, print' href='../../../Slidy2/styles/slidy.css'/> 
+    <link type='text/css' rel='stylesheet' media='screen, projection, print' href='../../../MySlidy/style.css'/> 
+    <style type='text/css'>div.slide { background-image: url("../../images/sjsu_logo.gif"); background-position: top right; background-repeat: no-repeat; }</style> 
+    <script src='../../../Slidy2/scripts/slidy.js' charset='utf-8' type='text/javascript'></script>
+    <script src='../../../MySlidy/slidy.js' charset='utf-8' type='text/javascript'></script> </head> 
+  <body><h1>Mobile Programming - Unit 6</h1>
+    <p class='fullimage'><img src='../../images/tower-hall.jpg' alt='Cover page image'/></p> 
+    <p><a href='http://horstmann.com/'>Cay S. Horstmann</a></p>
+
+    <h1>Garbage Collection</h1>
+    <ul><li>Invented around 1959 for Lisp</li>
+      <li>As old as your professor!</li>
+      <li>Became mainstream with Java</li>
+      <li>Unfortunately, Objective-C predates that</li>
+      <li>C: Manual memory management with <code>malloc</code>, <code>free</code></li>
+      <li>Apple's Objective-C uses reference counting</li>
+      <li>Call <code>[obj retain]</code> to increment its count, <code>[obj release]</code> to decrement</li>
+      <li>Automatic reference counting inserts these calls automatically</li>
+      <li>Implement <code>dealloc</code> method. If reference count reaches 0, that's called.
+      <pre>-(void)dealloc
+{
+ /* call release on instance variable; then... */
+ [super dealloc];
+}</pre></li>
+      <li>Only works in the absence of cycles</li>
+      <li>An effort at proper garbage collection failed with Apple's Objective-C 2.0</li>      
+    </ul>
+
+    <h1>Inheritance</h1>
+    <ul><li><code>@interface Subclass : Superclass</code></li>
+      <li>Cosmic superclass <code>Object</code></li>
+      <li>We usually extend at least <code>NSObject</code></li>
+      <li><code>super</code> is like in Java:
+          <pre>-(id) init { 
+self = [super init];
+// ...
+return self;
+}</pre></li>
+    </ul>
+    <h1>More GUI Minutiae</h1>
+    <ul><li>You can have more than one form of an action method
+        <pre>-(IBAction) actionMethod;
+-(IBAction) actionMethod:(id)sender;
+-(IBAction) actionMethod:(id)sender withEvent:(UIEvent *)event;
+        </pre>
+      </li>
+      <li>All UI components are subclasses of <code>UIControl</code></li>
+      <li>Each control can trigger multiple actions depending on how they are touched. For example, a finger swipe might do something different than a tap.</li>
+    </ul>
+    
+    <h1>More Objective-C Trivia</h1>
+    <ul><li><pre>        @property (<strong>retain, nonatomic</strong>) UILabel *statusText;
+        </pre></li>
+      <li><code>retain</code> means that <code>retain</code> is called whenever this property is copied.</li>
+      <li><code>nonatomic</code> means that no lock code is inserted to make access threadsafe</li>
+      <li>Objective-C was defined before C had a boolean type.
+To do booleans in Objective-C you declare a variable to be of type <code>BOOL</code>. This has two values: <code>YES</code> or <code>NO</code>.</li>
+    </ul>
+
+    <h1>Table Views</h1>
+    <ul><li>Tables are everywhere</li>
+      <li><img src='tableviews.jpg'/></li>
+    </ul>
+
+    <h1>Table Views</h1>
+    <ul><li>Table view instance of <code>UITableView</code></li>
+      <li>Each row is instance of <code>UITableViewCell</code></li>
+      <li><img src='tables2.jpeg'/></li>
+      <li>Table gets data from object conforming to <code>UITableViewDelegate</code> protocol</li>
+      <li>Row data from object conforming to <code>UITableViewDataSource</code> protocol</li>
+      <li>Row data is cached but needs to be re-supplied on demand</li>
+    </ul>
+
+    <h1>Table Styles</h1>
+    <ul><li>Grouped, plain, indexed</li>
+      <li><img src='tables3.jpeg'/></li>
+      <li>Each division is a <em>section</em></li>
+    </ul>
+
+    <h1>Table Classes</h1>
+    <ul><li><code>UITableViewDelegate</code> describes visual appearance, manipulation options</li>
+      <li><code>UITableViewDataSource</code> describes contents of table (2 required methods)</li>
+      <li><code>numberOfRowsInSection</code> gives rows in a particular section</li>
+      <li><code>cellForRowAtIndexPath</code> gives <code>UITableViewCell</code> for <a href='http://developer.apple.com/library/ios/#documentation/Cocoa/Reference/Foundation/Classes/NSIndexPath_Class/Reference/Reference.html#//apple_ref/doc/c_ref/NSIndexPath'><code>NSIndexPath</code></a></li>
+      <li>Need <em>reuse identifiers</em> for enabling cell reuse. Can use same identifier if all cells look the same.</li>
+    </ul>
+    
+    <h1>Lab</h1> 
+    <p class='sideimage'><img src='../../images/lab.jpg'/></p> 
+    <ul><li>Bring your laptop to each class</li> 
+      <li>You will work with a buddy</li> 
+      <li>One of you writes code, the other types up answers</li> 
+      <li>Switch roles each lab (not each day)</li> 
+      <li>Submit lab work to Piazza</li> 
+    </ul>
+
+    <h1>A Table</h1>
+      <ul><li>Make a new project, this time starting with an <em>empty project</em>, but otherwise with the same settings as before. Call it <code>Quiz</code>.</li>
+        <li>File -&gt; New -&gt; File ... -&gt; Objective-C Class. Name <code>SJSUFirstViewController</code>, superclass <code>UITableViewController</code></li>
+        <li>Note: If you have an old version of XCode, you can't do that, and you aren't getting the default implementations that you need. In that case, copy from <a href='SJSUViewController.m'>this file</a></li>
+        <li>Edit <code>SJSUAppDelegate.m</code>. Add <code>#import "SJSUFirstViewController.h"</code>. Below <code>// Override point for customization after application launch.</code>, put
+      <pre>            SJSUFirstViewController *first = [[SJSUFirstViewController alloc] init];
+            UINavigationController *navigation = [[UINavigationController alloc]
+                                                        initWithRootViewController:first];
+            self.window.rootViewController = navigation;</pre>
+        </li>
+        <li>Place <a href='Quiz.plist'><code>Quiz.plist</code></a> into the <code>Quiz</code> directory of your project. Right-click on the project and select Add Files to "Quiz". Add the file. Click on it to explore what's inside.</li>
+        <li>Add the following instance variable to <code>SJSUFirstViewController</code>, right above the first method:
+          <pre>            NSArray *questions;</pre>
+        </li>
+        <li>Add this code below <code>// Custom initialization</code> in <code>initWithStyle</code>:
+        <pre>                self.title = @"Quiz";
+                NSString *path = [[NSBundle mainBundle] pathForResource:@"Quiz"                                                                         ofType:@"plist"];
+                questions = [NSArray arrayWithContentsOfFile:path];</pre></li>
+      
+      <li>Change <code>numberOfSectionsInTableView</code> to return 1 and <code>tableView:numberOfRowsInSection</code> to return <code>[questions count]</code></li>
+      <li>Under <code>// Configure the cell...</code> in <code>tableView:cellForRowAtIndexPath</code>, put
+    <pre>cell.textLabel.text = [[questions objectAtIndex: indexPath.row] objectForKey: @"text"];</pre>
+      </li>
+      <li>If you are using iOS6 or later, add this call to register the cell prototype in <code>viewDidLoad</code>:
+        <pre>    [self.tableView registerClass:[UITableViewCell class]
+                 forCellReuseIdentifier:@"Cell"];</pre>
+      </li>
+      <li>Run the program. What happens?</li>
+      <li>Click on a row. What happens? Why?</li>
+    </ul>
+    <h1>Navigating to the Next Level</h1>
+    <ul><li>File -&gt; New -&gt; File ... -&gt; Objective-C Class. Name <code>SJSUSecondViewController</code>, superclass <code>UITableViewController</code></li>
+      <li>In <code>SJSUSecondViewController.h</code>, below the <code>@interface</code> line, add
+    <pre>@property (copy, nonatomic) NSArray *choices;</pre>    </li>
+      <li>In <code>SJSUSecondViewController.m</code>, make the appropriate settings, following the previous slide:
+          <ul><li>Set the title: <code>self.title = @"Question";</code></li>
+            <li>Change <code>numberOfSectionsInTableView</code> to return 1 and <code>tableView:numberOfRowsInSection</code> to return <code>[self.choices count]</code></li>
+            <li>If you are using iOS 6 or later, register the cell prototype</li>
+            <li>To show a cell, call <code>cell.textLabel.text = self.choices[indexPath.row];</code></li>
+          </ul>
+      </li>
+    <li>In <code>SJSUFirstViewController.m</code>, make these changes:
+      <ul><li>Add <code>#import "SJSUSecondViewController.h"</code></li>
+        <li>In <code>didSelectRowAtIndexPath</code>, add
+        <pre>            SJSUSecondViewController *controller = [[SJSUSecondViewController alloc] init];
+            controller.choices = [[questions objectAtIndex: indexPath.row] objectForKey: @"choices"];
+            [self.navigationController pushViewController:controller animated:YES];</pre></li>
+      </ul>
+    </li>
+    <li>Run again and select a question. What happens?</li>
+    <li>How do you get back to the questions?</li>
+    <li>Extra time? Change the background color of a choice that the user picked to red or green if the user answered it, depending on whether the answer was correct or not. Hint: <code>cell.textLabel.backgroundColor = [UIColor colorWithRed: 0.0 green: 1.0 blue: 0.0 alpha: 1.0]</code></li>
+  </ul>
+</body>
+</html>

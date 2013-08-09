@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns='http://www.w3.org/1999/xhtml'><head><title>Unit 3</title> 
+    <meta name='copyright' content='Copyright ⓒ 2013 Cay S. Horstmann'/> 
+    <meta content='text/html; charset=UTF-8' http-equiv='content-type'/> 
+    <link type='text/css' rel='stylesheet' media='screen, projection, print' href='../../../Slidy2/styles/slidy.css'/> 
+    <link type='text/css' rel='stylesheet' media='screen, projection, print' href='../../../MySlidy/style.css'/> 
+    <style type='text/css'>div.slide { background-image: url("../../images/sjsu_logo.gif"); background-position: top right; background-repeat: no-repeat; }</style> 
+    <script src='../../../Slidy2/scripts/slidy.js' charset='utf-8' type='text/javascript'></script>
+    <script src='../../../MySlidy/slidy.js' charset='utf-8' type='text/javascript'></script> </head> 
+  <body><h1>Mobile Programming - Unit 3</h1>
+    <p class='fullimage'><img src='../../images/tower-hall.jpg' alt='Cover page image'/></p> 
+    <p><a href='http://horstmann.com/'>Cay S. Horstmann</a></p>
+
+    		<h1>Making buttons work</h1>
+		<ul><li>Need to add a listener to the button</li>
+			<li>A listener is a method with parameter <code>View</code> and return type <code>void</code></li>
+			<li>Can set in XML: 
+					<pre>&lt;Button ...
+    android:text="@string/button_send"
+    android:onClick="sendMessage" /&gt;</pre></li>
+		  <li>Can set programmatically:
+					<pre>((Button) findViewById(R.id.button2)).setOnClickListener(
+   new View.OnClickListener() {
+      @Override public void onClick(View arg0) {
+         ...
+   }});</pre></li>
+			<li>I prefer the latter—why mix layout with code?</li>
+		</ul>
+
+		<h1>Changing Activities</h1>
+		<ul><li>Often, a UI event such as a button click is an indication to switch to a different view.</li>
+			<li>You switch to a new view with an <em>intent</em>. </li>
+			<li>An intent describes what you want to do, e.g. show a web page, play a movie</li>
+			<li>In general, multiple applications can offer to satisfy the intent. It's beyond your control how the intent is satisfied. End-users <a href='http://blogs.computerworld.com/android/21699/android-killer-feature'>like this</a>.</li>
+			<li>An <em>explicit intent</em> is delivered to a particular activity.
+				<pre>Intent intent = new Intent(Outerclass.this, ResponseActivity.class);</pre></li>
+			<li>Call <code>startActivity(intent)</code> to start new intent.</li>
+		</ul>
+		<h1>Transferring Data to the Target Activity</h1>
+		<ul><li>First parameter is a <code>Context</code>. <code>Activity</code> is a subclass of <code>Context</code>.</li>
+			<li>Can add extra stuff to intent which can be retrieved by new activity
+				<pre>intent.putExtra(keyString, obj);</pre></li>			
+			<li>Retrieve extra stuff in <code>onCreate</code> of new intent:
+					<pre>getIntent().getXXXExtra(keyString)</pre></li>
+			<li>See the <a href='http://developer.android.com/reference/android/content/Intent.html'>API doc</a> for the various <code>getXXXExtra</code> methods.</li>
+			<li>Within one app, best to transfer domain objects, not arrays of strings</li>
+			<li>Objects must be serializable.</li>
+		</ul>
+
+		<h1>Lists</h1>
+		<ul><li>Long, often scrolling, sequence of items</li>
+			<li>Put <code>ListView</code> into the activity XML</li>
+			<li>Make a separate view for the item</li>
+			<li>Use <code>Adapter</code> to populate list</li>
+			<li>Add <code>OnItemClickListener</code> to get notified of item selection</li>
+			<li>Override <code>void onItemClick(AdapterView&lt;?&gt; parent, View view, int position, long id)</code></li>
+		</ul>
+
+		<h1>List Adapters</h1>
+		<ul><li>Simplest case: List of strings</li>
+			<li><code>new ArrayAdapter&lt;String&gt;(activity, itemLayoutId, strings)</code></li>
+			<li>Item layout ID should be a single <code>TextView</code></li>
+			<li>Otherwise, override <code>getView(int, View, ViewGroup)</code> in subclass</li>
+			<li>For example, if item view has two text views:
+					<pre>public View getView(int position, View v, ViewGroup parent) {
+    if (v == null) {
+        LayoutInflater vi = LayoutInflater.from(getContext());
+        v = vi.inflate(R.layout.itemLayoutId, parent);
+    }
+    Item item = items.get(position);
+    ((TextView) v.findViewById(R.id.description)).setText(item.getDescription());
+    ((TextView) v.findViewById(R.id.price)).setText(item.getPrice());
+    return v;
+}</pre></li>			
+		</ul>
+
+    <h1>Lab</h1> 
+    <p class='sideimage'><img src='../../images/lab.jpg'/></p> 
+    <ul><li>Bring your laptop to each class</li> 
+      <li>You will work with a buddy</li> 
+      <li>One of you writes code, the other types up answers</li> 
+      <li>Switch roles each lab (not each day)</li> 
+      <li>Submit lab work to Piazza</li> 
+    </ul>
+
+    <h1>Making the Buttons Active</h1>
+    <ol><li>Start with the solution from the previous lab. (Here is <a href='MainActivity.java'>mine</a>.)</li>
+			<li>Select File → New → Other → Android → Android Activity and make a <code>ResponseActivity</code> with all the default options.</li>
+			<li>In the <code>MainActivity</code>, make the first button go to the <code>ResponseActivity</code> when clicked. How did you do that?</li>
+			<li>What happens when you run the program and click the button?</li>
+			<li>What happens when you click the Back button in the emulator?</li>
+			<li>Now make all buttons go to the <code>ResponseActivity</code>. Use a <code>for</code> loop like in the <code>onPostExecute</code> method.</li>
+		</ol>
+
+		<h1>Transferring Data to the Target Activity</h1>
+		<ol><li>Right now, all the buttons do the same thing. We want each button to bring relevant information to the target activity so that it can do it's job. We'll overdesign the application a bit so that you can use the design in the future.</li>
+			<li>We want to transfer domain objects. Here is a <a href='Question.java'>Question class</a>. Add it to your project. (Adjust the package if necessary.)</li>
+			<li>Add an instance variable <code>private Question question</code> to <code>MainActivity</code>. Change the code in <code>doInBackground</code> to construct a <code>new Question()</code>, call <code>read(in)</code>, and set the <code>question</code> instance variable. Remove the <code>ArrayList&lt;String&gt;</code>. Change the return type to <code>Void</code> and return <code>null</code>.</li>
+			<li>Change <code>onPostExecute</code> so that it gets the question text and choices from the <code>question</code> object.</li>
+			<li>Change the URL to point to <a href='question.txt'>this file</a>. The <code>*</code> denotes the correct answer.</li>
+			<li>Try your program. It should still work.</li>
+			<li>Now use <code>putExtra</code> to add the <code>question</code> and the choice corresponding to the current button to the intent. The latter is a bit tricky. Use this outline:
+					<pre>for (int i = 0; i &lt; buttonIds.length; i++) {
+    final String choice = question.getChoices().get(i);
+    ((Button) findViewById(buttonIds[i])).setOnClickListener(
+        new View.OnClickListener() {
+    	    @Override public void onClick(View arg0) {
+            Intent intent = new Intent(MainActivity.this, ResponseActivity.class);
+            intent.putExtra("choice", choice);
+            ...
+    }});
+}</pre></li>
+			<li>To see why you need the <code>final</code>, try
+				<pre>intent.putExtra("choice", question.getChoices().get(i))</pre>
+				instead. What happens?</li>
+			<li>Now capture the information on the target activity. Call <code>getStringExtra</code> and <code>getSerializableExtra</code>. Then call
+				<pre>((TextView) findViewById(R.id.responseText)).setText(
+    question.getAnswer().equals(choice) ? "Good job!" : "Try again!");</pre></li>
+			<li>Try it out. What happens?</li>
+    </ol>
+		<h1>Displaying the Choices in a List</h1>
+		<ol><li>Remove the buttons and all but the top text view from the main layout, and instead put in a list view below the question text.</li>
+			<li>Comment out the button handler for now and replace the text field initialization in <code>onPostExecute</code> with the initialization of the list view. Make an <code>ArrayAdapter</code> out of the question choices. What is your code?</li>
+			<li>What happens when your application runs?</li>
+			<li>What happens when you select one of the questions?</li>
+			<li>Now add an <code>OnItemClickListener</code>. Move the appropriate code from your button listener. What is your code?</li>
+			<li>Now what happens when you run and select one of the questions?</li>
+		</ol>
+  </body>
+</html>

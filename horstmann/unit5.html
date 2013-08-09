@@ -1,0 +1,157 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns='http://www.w3.org/1999/xhtml'><head><title>Unit 5</title> 
+    <meta name='copyright' content='Copyright ⓒ 2013 Cay S. Horstmann'/> 
+    <meta content='text/html; charset=UTF-8' http-equiv='content-type'/> 
+    <link type='text/css' rel='stylesheet' media='screen, projection, print' href='../../../Slidy2/styles/slidy.css'/> 
+    <link type='text/css' rel='stylesheet' media='screen, projection, print' href='../../../MySlidy/style.css'/> 
+    <style type='text/css'>div.slide { background-image: url("../../images/sjsu_logo.gif"); background-position: top right; background-repeat: no-repeat; }</style> 
+    <script src='../../../Slidy2/scripts/slidy.js' charset='utf-8' type='text/javascript'></script>
+    <script src='../../../MySlidy/slidy.js' charset='utf-8' type='text/javascript'></script> </head> 
+  <body><h1>Mobile Programming - Unit 5</h1>
+    <p class='fullimage'><img src='../../images/tower-hall.jpg' alt='Cover page image'/></p> 
+    <p><a href='http://horstmann.com/'>Cay S. Horstmann</a></p>
+
+    <h1>Introducing iOS Development</h1>
+    <ul><li>You must use a Mac.</li>
+      <li>Install XCode from the Appstore</li>
+      <li>You must program in Objective-C</li>
+      <li>Adds Smalltalk-like OO features to C</li>
+      <li>Dates from the 1980</li>
+      <li>Used in NeXTSTEP, the predecessor to Mac OS X</li>
+      <li>Used in Mac OS X and iOS</li>
+    </ul>
+
+    <h1>Messages</h1>
+    <ul><li>In Java, C++, you call a method:
+          <pre>obj.method(arg1, arg2)</pre></li>
+      <li>In Smalltalk and Objective-C, you send a message</li>
+      <li>Message send is more dynamic</li>
+      <li>Object can change its mind how to deal with a message...but it usually doesn't.</li>
+      <li>Syntax is different
+        <pre>[obj method: arg1 param2: arg2]</pre></li>
+      <li>The <code>[obj method: arg]</code> part is just another syntax for <code>obj.method(arg)</code></li>
+      <li>The <code>param2:</code> part is a Smalltalk idiosyncracy, somewhat but not quite like “named parameters” in languages such as C#, Groovy, or Scala</li>
+      <li>Ex. <code>[myArray insertObject: obj atIndex: 1]</code>, calls method <code>insertObject:atIndex:</code></li>
+    </ul>
+     
+    <h1>Defining Classes</h1>
+    <ul><li>Separate interfaces and implementation (like in C++)</li>
+      <li>Interface in .h file</li>
+      <li>Use + for class (static) methods, - for instance methods</li>
+      <li><pre>@interface classname : superclassname {
+ // instance variables
+}
++ (return_type)classMethod:(param1_type)param1_varName;
+- (return_type)instanceMethod:(param1_type)param1_varName :(param2_type)param2_varName;
+@end</pre></li>
+      </ul>
+      
+    <h1>Implementation</h1>
+    <ul><li>In .m file</li>
+      <li><pre>@implementation classname
++ (return_type)classMethod
+{
+ // implementation
+}
+- (return_type)instanceMethod
+{
+ // implementation
+}
+@end</pre>
+        </li>
+    </ul>
+
+    <h1>Constructing Objects</h1>
+    <ul><li>Send the <code>alloc</code> and <code>init</code> methods to an object: <code>[[NSDate alloc] init]</code></li>
+      <li>These are class methods.</li>
+    </ul>
+    
+    <h1>Properties</h1>
+    <ul><li>Property is like getter/setter pair in Java</li>
+      <li>In Objective-C, you don't use <code>get</code>: <code>name/setName</code></li>
+      <li><code>@property (nonatomic, retain) NSString *name;</code></li>
+      <li>Ignore <code>nonatomic</code> and <code>retain</code> for now.</li>
+      <li>The <code>@property</code> declaration goes in the .h file</li>
+      <li>In the .m file, place <code>@synthesize name;</code></li>
+      <li>Now can use dot notation with property: <code>q.name</code></li>
+    </ul>
+
+    <h1>Miscellaneous</h1>
+    <ul><li><code>nil</code> is a null reference</li>
+      <li>Strings are written as <code>@"Hello"</code></li>
+      <li><code>self</code> is like <code>this</code> in Java</li>
+      <li><code>NSString</code>, <code>NSArray</code>, <code>NSMutableArray</code>, <code>NSMutableDictionary</code></li>
+      <li>API reference is <a href='https://developer.apple.com/library/mac/navigation/#section=Frameworks&topic=Foundation'>here</a></li>
+      <li>Remember to use pointers for all object references: <code>NSString *greeting = @"Hello";</code></li>
+      <li>However, <code>id</code> is a generic object reference that doesn't require an asterisk: <code>id greeting = ...;</code></li>
+    </ul>
+
+    <h1>Integration with InterfaceBuilder</h1>
+    <ul><li>Apple's Objective-C has morphed into a DSL for InterfaceBuilder</li>
+      <li><code>IBOutlet</code>: Object linked to .xib file entity
+        <pre>@property (nonatomic, retain) IBOutlet UITextView *choice_text;</pre>
+      </li>
+      <li><code>IBAction</code>: Method that can be called from UI</li>
+    </ul>
+    
+    <h1>Lab</h1> 
+    <p class='sideimage'><img src='../../images/lab.jpg'/></p> 
+    <ul><li>Bring your laptop to each class</li> 
+      <li>You will work with a buddy</li> 
+      <li>One of you writes code, the other types up answers</li> 
+      <li>Switch roles each lab (not each day)</li> 
+      <li>Submit lab work to Piazza</li> 
+    </ul>
+
+    <h1>Hello, World</h1>
+    <ul><li>Start XCode and make new single-view iOS application. Call it Unit5</li>
+      <li>Set the prefix to SJSU</li>
+      <li>Check <em>only</em> the second checkbox (Use automatic reference counting)</li>
+      <li>On the left, select the .xib file</li>
+      <li>Locate the library in the bottom right</li>
+      <li>Click on the cube and search for Label</li>
+      <li>Drag the label on the center of the UI builder in the middle</li>
+      <li>Double-click on Label and change to Hello, World!</li>
+      <li>Select Product → Run from the menu</li>
+    </ul>
+
+    <h1>Some Code</h1>
+    <ul><li>In SJSUViewController.h, add
+        <pre>@property (nonatomic, retain) NSArray *choices;</pre>
+      </li>
+      <li>In SJSUViewController.m, add
+        <pre>@synthesize choices;</pre>
+        after <code>@implementation</code>
+      </li>
+      <li>In <code>viewDidLoad</code>, add the following code after <code>[super viewDidLoad];</code>:
+        <pre>self.choices = [NSArray arrayWithObjects: @"Android", @"Blackberry", @"iOS", @"Windows Mobile"];</pre>
+      </li>
+      <li>You get a warning triangle. What's the message?</li>
+      <li>Apply the suggested fix. What happens?</li>
+      <li>In <code>viewDidReceiveMemoryWarning</code>, add
+        <pre>self.choices = nil;</pre>
+        This helps with the semi-automatic memory management.
+      </li>
+      <li>In SJSUViewController.h, add the following under the array:
+          <pre>@property (nonatomic, retain) IBOutlet UILabel *choice_text;
+-(IBAction)choice_btn_touch:(id)sender;</pre>
+      </li>
+      <li><code>choice_text</code> is a property, so what do you need to do in ViewController.m?</li>
+      <li>And in <code>ViewDidReceiveMemoryWarning</code>?</li>
+      <li>Now we add the implementation of the button callback. Add it before <code>@end</code> in the .m file:
+          <pre>-(IBAction)choice_btn_touch:(id)sender {
+    int count = [self.choices count];
+  	int index = arc4random() % count;
+  	NSString *choice = [self.choices objectAtIndex:index];
+	  self.choice_text.text = choice;      
+}</pre></li>
+      <li>Now select the .xib file. Keep the label from the previous step and add a Round Rect Button.</li>
+      <li>Select View → Assistant Editor</li>
+      <li>Right-click the label and drag to the <code>choice_text</code> property.</li>
+      <li>Right-click the button. Drag to the callback function.</li>
+      <li>Run your program. What does it do when you click the button?</li>
+    </ul>      
+  </body>
+</html>

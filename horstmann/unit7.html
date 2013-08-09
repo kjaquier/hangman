@@ -1,0 +1,283 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns='http://www.w3.org/1999/xhtml'><head><title>Unit 7</title> 
+    <meta name='copyright' content='Copyright ⓒ 2013 Cay S. Horstmann'/> 
+    <meta content='text/html; charset=UTF-8' http-equiv='content-type'/> 
+    <link type='text/css' rel='stylesheet' media='screen, projection, print' href='../../../Slidy2/styles/slidy.css'/> 
+    <link type='text/css' rel='stylesheet' media='screen, projection, print' href='../../../MySlidy/style.css'/> 
+    <style type='text/css'>div.slide { background-image: url("../../images/sjsu_logo.gif"); background-position: top right; background-repeat: no-repeat; }</style> 
+    <script src='../../../Slidy2/scripts/slidy.js' charset='utf-8' type='text/javascript'></script>
+    <script src='../../../MySlidy/slidy.js' charset='utf-8' type='text/javascript'></script> </head> 
+  <body><h1>Mobile Programming - Unit 7</h1>
+    <p class='fullimage'><img src='../../images/tower-hall.jpg' alt='Cover page image'/></p> 
+    <p><a href='http://horstmann.com/'>Cay S. Horstmann</a></p>
+
+    <h1>HTML 5 + JavaScript</h1>
+    <ul><li>Client-side UI toolkit that runs in the browser</li>
+      <li>For dynamic web pages: HTML+CSS = page layout, JavaScript = UI behavior</li>
+      <li>Single-page or few-pages apps, contents updated dynamically</li>
+      <li>Can use lightweight "wrappers" to package your HTML 5 app as a native app (even using some of the native sensors you wouldn't normally be able to use):
+          <ul><li><a href='http://phonegap.com/'>PhoneGap</a></li>
+            <li><a href='http://www.sencha.com/products/touch/'>Sencha Touch</a></li>
+          </ul>
+      </li>
+      <li>Use Javascript framework for widgets, layout, and event handling</li>
+      <li>For this class, we are going to make use of <a href='http://jquerymobile.com/'>jQuery Mobile</a>.</li>
+    </ul>
+     
+    <h1>A Template HTML 5 Document with jQuery Mobile</h1>
+    <pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt; 
+ &lt;head&gt; 
+    &lt;title&gt;Hello HTML 5&lt;/title&gt; 
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"/&gt; 
+		&lt;link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" /&gt;			
+		&lt;script src="http://code.jquery.com/jquery-1.9.1.min.js"&gt;&lt;/script&gt;
+		&lt;script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"&gt;&lt;/script&gt;
+&lt;/head&gt; 
+&lt;body&gt; 
+
+&lt;div data-role="page"&gt;
+
+    &lt;div data-role="header"&gt;
+        &lt;h1&gt;My First HTML Application&lt;/h1&gt;
+    &lt;/div&gt;
+
+    &lt;div data-role="content"&gt;    
+        &lt;p&gt;This is an HTML 5 app.&lt;/p&gt;        
+    &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre> 
+			<p><a href='html5example.html'>Hello HTML 5 app</a>.</p>
+    <h1>General formal of a document</h1>
+    <ul><li>HTML 5 page starts with  <code>&lt;!DOCTYPE html&gt;</code>. Note: No version of HTML</li> 
+        <li>Use the script tag to include the jQuery framework, and the jQuery mobile framework.</li> 
+        <li>The link tag includes the CSS (Cascading Style Sheet) file. </li> 
+        <li>Meta-tags are used to specify information about how the page should be loaded</li>
+        <li>The <em>viewport</em> of a browser is the virtual window area in which it renders a web page. This may be larger than the devices screen size (for example, you might need to scroll or pinch to see the whole viewport).</li> 
+        <li>In our example, we set the viewport width to the device width and no zoom.</li> 
+        <li>Notice in our example, the div tag has a data-role attribute. data-* attributes are user-defined attributes which were introduced with HTML 5.</li> 
+</ul>
+      <h1>Where to Find Examples</h1> 
+      <ul><li>The <a href='http://jquerymobile.com/demos/1.3.1/'>jQuery Mobile Getting Started</a> page has a lot of quick examples you can try out to get started with creating HTML 5 apps.</li> 
+        <li>Here is one of the widgets from that page for displaying unordered lists.</li> 
+        <li>The code you would put within your data-role="content" div tag would look like: 
+          <pre>
+&lt;ul data-role="listview" data-inset="true" data-filter="true"&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Blackberry&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;iPhone&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Windows Mobile&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Android&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Firefox OS&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt; 
+</pre> 
+        </li> 
+        <li>This would render as this <a href='listpage.html'>Unordered List Page</a>.</li> 
+      </ul>
+		
+      <h1>Understanding Javascript</h1> 
+      <ul><li>Javascript is an interpreted language developed by Brendan Eich at Netscape around 1995.</li> 
+        <li>As we have already seen in our first demo of HTML 5, Javascripts can be either <b>directly</b> or <b>indirectly</b> embedded in a document.</li> 
+        <li>Directly: 
+          <pre>&lt;script type="text/javascript"&gt;
+alert('Hello')
+&lt;/script&gt;</pre> 
+        </li> 
+        <li>Indirectly: 
+          <pre>&lt;script type="text/javascript" src="myscript.js" /&gt;</pre> 
+        </li> 
+      </ul> 
+
+      <h1>Basic Syntax</h1> 
+      <ul><li>Similar to Java, C, etc.</li>
+        <li>Dynamically typed</li>
+        <li>Semicolons to end lines in Javascript are optional. Beware: 
+          <pre>return 
+x; // has the effect of just return!</pre> 
+        </li> 
+        <li>5 primitive types: Number, String, Boolean, Undefined and Null.</li> 
+        <li>Numbers can by converted to strings using the toString method of Number. So can do: 
+          <pre>x = 5.5; y = x.toString()</pre> 
+        </li> 
+        <li>Strings can be concatenated using +. Ex: greeting = "hi" + "you"</li> 
+      </ul> 
+
+      <h1>Ways to invoke Javascript</h1> 
+      <ul><li>After the page is done being parsed and drawn, there several different ways that Javascript might be invoked: 
+          <ol><li>By a link: 
+              <pre>&lt;a href="javascript:alert('hi there')"&gt;Hi there alert&lt;/a&gt;
+</pre> <a href='javascript:alert("hi%20there")'>Hi there alert</a>
+            </li> 
+            <li>By an event set up using an attribute: 
+              <pre>&lt;button onclick="alert('hi there')"&gt;Hi There!&lt;/button&gt;</pre> 
+              <button onclick='alert("hi there")'>Hi There!</button>
+            </li> 
+            <li>By an event set up using Javascript: 
+              <pre>&lt;button id="yo"&gt;Yo!&lt;/button&gt;
+&lt;script&gt;
+document.getElementById("yo").onclick = function() {alert("yo")}
+&lt;/script&gt;</pre> 
+              <button id='yo'>Yo!</button> 
+              <script type='text/javascript'>//<![CDATA[
+document.getElementById("yo").onclick = function() {alert("yo")}
+//]]> </script> 
+            </li> 
+          </ol> 
+        </li> 
+      </ul>
+      <h1>Objects</h1> 
+      <ul><li>Objects can be created with an initial declaration like: 
+          <pre>var my_object = new Object()
+</pre> 
+        </li> 
+        <li>This object would initially have no properties.</li> 
+        <li>An assignment like: 
+          <pre>my_car.make= "Honda" /* would then give a property make a value. */
+//can access as
+p = my_car["make"]
+q = my_car.make
+</pre> 
+        </li> 
+        <li>You can also nest objects this: 
+          <pre>my_car.owner = { name: 'Fred', age: 42 }</pre> 
+        </li> 
+        <li>You can loop over properties using: 
+          <pre>for (var prop in my_car){...}
+</pre> 
+        </li> 
+      </ul>
+      <h1>Arrays</h1> 
+      <ul><li>Arrays can be created with the syntax: 
+          <pre>var myArr = new Array(1, 2, "hello")
+var myArr = new Array(100)
+var myArr = [1,2,3]
+//to access
+myArr[0]
+//to determine length
+myArr.length</pre> 
+        </li> 
+      </ul> 
+      <h1>Functions</h1> 
+      <p>Below is an example of the syntax for declaring a function in Javascript</p> 
+      <pre>function swap(i, j, a)
+{
+    var tmp=a[i] /* explicitly defined variables 
+                     have scope within the function
+                     if I had declared the variable 
+                     implicitly it would have global scope */
+    a[i] = a[j]; a[j] = tmp
+}</pre>
+      <ul><li>This function could be called with a syntax like: 
+          <pre>swap(10, 5, b)</pre> 
+        </li> 
+        <li>Functions are objects so can be assigned to variables. 
+          <pre>var b = swap</pre> 
+        </li> 
+        <li>We can create functions anonymously (often done in jQuery) and assign them to variables: 
+          <pre>swap = function(i, j, a) { /* code above */}</pre> 
+        </li> 
+        <li>The definition of a function does not need to list its arguments. One can obtain a list of arguments using the argument subobject of a Function. 
+          <pre>function swap()
+{ var i = this.arguments[0], j=this.arguments[1], a=this.arguments[2]
+  //same code as before
+}</pre> 
+        </li> 
+      </ul>
+
+
+      <h1>jQuery</h1> 
+      <ul><li>jQuery was developed by John Resig in 2006 and is used in 52% of the top 10,000 web sites.</li> 
+        <li>Different Browsers implement Javascript slightly differently.</li> 
+        <li>The syntax for referring to elements on a web page in DOM as well as the syntax for doing Ajax is awkward at best.</li> 
+        <li>jQuery aims to solve these two problems.</li> 
+        <li>For example, rather than doing: 
+          <pre>document.getElementById("yo").onclick = function() {alert("yo")}</pre>
+					in jQuery we could do: <pre>$("#yo").onclick = function() {alert("yo")}</pre>
+        </li> 
+        <li>To add an onload event handler to a document, we can do: 
+          <pre>$(document).ready(handler)</pre> 
+        </li> 
+      </ul>
+
+
+    <h1>Lab</h1> 
+    <p class='sideimage'><img src='../../images/lab.jpg'/></p> 
+    <ul><li>Bring your laptop to each class</li> 
+      <li>You will work with a buddy</li> 
+      <li>One of you writes code, the other types up answers</li> 
+      <li>Switch roles each lab (not each day)</li> 
+      <li>Submit lab work to Piazza</li> 
+    </ul>
+		<h1>jQuery Mobile</h1>
+		<ul><li>Point your mobile device or your browser to <a href='http://view.jquerymobile.com/1.3.1/'>the JQuery Mobile demo site</a></li>
+			<li>Select Listviews from the Widget Reference</li>
+			<li>What is the key to making lists with dividers A, B, C, ...?</li>
+			<li>Make a directory <code>unit7</code>. Inside, place a file <code>example1.html</code>. Put in the JQuery Mobile outline from the lecture slide. Load it in your browser. What happens?</li>
+      <li>Now let's look at it in the Android emulator. We need a web server. Just start up GlassFish, and in <code>unit7</code>, run
+    <pre>jar cvfM path/to/glassfish4/glassfish/domains/domain1/autodeploy/unit7.war .</pre>
+      Note the <code>.</code> at the end—that's the current directory.
+      To check that it works, point your browser to <code>localhost:8080/unit7/example1.html</code>. Now in the emulator, start the web browser and point to <code>10.0.2.2:8080/unit7/example1.html</code></li>
+			<li>Make a list view (without dividers) for a quiz question. Put the question text above the list and just put the choices, not any buttons, inside the list. What is your code?</li>
+			<li>What happens when you click on a list item?</li>
+			<li>We need to work on the link targets. Right now, they go back to the same page. Set up three pages
+				<pre>&lt;div data-role="page" id="question"&gt;
+    &lt;div id="questionText" data-role="header"&gt;
+    &lt;/div&gt;   
+     &lt;div data-role="content"&gt;
+        &lt;ul id="choices" data-role="listview"&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div data-role="page" id="correct"&gt;				
+   <var>congratulations goes here</var>
+&lt;/div&gt;
+&lt;div data-role="page" id="incorrect"&gt;				
+   <var>message goes here</var>
+&lt;/div&gt;					
+</pre>
+				Change the link targets from <code>#</code> to <code>#correct</code> or <code>#incorrect</code>. Now what does your app do?
+		</li>
+      </ul>
+      <h1>Programmatic Changes</h1>
+      <ul><li>That works, but it's hardwired. Let's say the question is in an object 
+    <pre>var question = { text: '...', choices: ['...', '...', '...', '...'], answer: '...' }      
+</pre>  (Eventually, we'd want to get that object from the internet.) We want to set the UI programmatically. That needs to be done in a callback when the document has been loaded. Add the following into the <code>head</code> part of your page:
+				<pre>      &lt;script type="text/javascript"&gt;                                         
+$(document).ready(function() {
+   $('a').click(function(event) { alert(event.target.firstChild.textContent) })
+ })
+       &lt;/script&gt;</pre>
+      Next, remove the <code>href</code> attributes from the links
+			Now what happens when you click a link?
+		</li>
+    <li>Ok, that's interesting. Now add the <code>var question</code> object to the top of the script. Remove the hard-coded header and add this to the <code>ready</code> handler:
+  <pre> $('#questionText').html(question.text)</pre>
+    What happens? Why?</li>
+        <li>Now remove the <code>&lt;li&gt;</code> tags from the <code>&lt;ul&gt;</code> element, and put them in programmatically with this outline:
+          <pre>var choices = $('#choices')
+for (var i = 0; i &lt; question.choices.length; i++) {
+    var item = $('&lt;li/&gt;')
+    var link = $('&lt;a/&gt;').html(question.choices[i])
+    item.append(link)
+    choices.append(item)
+}         
+choices.listview('refresh')</pre>
+        What happens when you run it?
+		</li>
+    <li>Finally, add an event handler to each link (in the <code>for</code> loop):
+  <pre>link.click(function() {
+    if (...) 
+        $.mobile.changePage('#correct')
+    else
+        ...    
+}</pre>
+      Note that in the <code>function</code>, you can access the enclosing variables such as <code>i</code> and <code>question</code>.
+      </li>
+    </ul>
+  </body>
+</html>
