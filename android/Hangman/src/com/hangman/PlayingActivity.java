@@ -30,22 +30,17 @@ public class PlayingActivity extends Activity {
 		// Get data from the previous try
 		Log.d(getClass().getSimpleName(), "Going for a new try");
 		data = (GameData) getIntent().getSerializableExtra("game_data");
-		Log.d(getClass().getSimpleName(), "Got the data");
-		int nbLetters = 'Z' - 'A' + 1;
-		final String[] letters = new String[nbLetters];
-		for (int i = 0; i < nbLetters; i++) {
-			letters[i] = String.format("%c", 'A' + i);
-		}
-		
+		Log.d(getClass().getSimpleName(), "Got the data!");
+
 		// Update the UI with these data
-		((TextView) findViewById(R.id.current_word)).setText(data.getWord());
-		((TextView) findViewById(R.id.nb_tries)).setText(data.getNbTries());
+		//((TextView) findViewById(R.id.current_word)).setText(data.getWord());
+		//((TextView) findViewById(R.id.nb_tries)).setText(data.getNbTries());
 		Log.d(getClass().getSimpleName(), "UI updated");
 		
 		class SendRequestTask extends AsyncTask<URL, Void, Void> {
 
 			@Override
-			protected Void doInBackground(URL... urls) {				
+			protected Void doInBackground(URL... urls) {
 				data = new GameData();
 				try {
 					Scanner in = new Scanner(urls[0].openStream());
@@ -65,7 +60,7 @@ public class PlayingActivity extends Activity {
 		}
 		
 		// Set the behaviour of the button that let us submit a new letter
-		((Button) findViewById(R.id.playbtn)).setOnClickListener(new View.OnClickListener() {
+		/*((Button) findViewById(R.id.playbtn)).setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -77,13 +72,14 @@ public class PlayingActivity extends Activity {
 					public Dialog onCreateDialog(Bundle savedInstanceState) {
 						AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 					    builder.setTitle("Submit a letter");
-					    final CharSequence[] letters = getArguments().getCharSequenceArray("letters");
-					    builder.setItems(letters, new DialogInterface.OnClickListener() {
+					    builder.setItems(data.getLetters(), new DialogInterface.OnClickListener() {
 					    	
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
-								Log.d(getClass().getSimpleName(), "Submitted : " + letters[which]);
+								String letter = data.getLetters()[which];
+								Log.d(getClass().getSimpleName(), "Submitted : " + letter);
 								data.setNbTries(data.getNbTries() - 1);
+								data.deleteLetter(letter);
 								Intent intent = new Intent(PlayingActivity.this, PlayingActivity.class);
 								intent.putExtra("game_data", data);
 								startActivity(intent);
@@ -94,12 +90,9 @@ public class PlayingActivity extends Activity {
 					}
 
 				};
-				Bundle bundle = new Bundle();
-				bundle.putCharSequenceArray("letters", letters);
-				letterChoiceDialog.setArguments(bundle);
 				letterChoiceDialog.show(PlayingActivity.this.getFragmentManager(), "lettersdialog");
 			}
-		});
+		});*/
 		Log.d(getClass().getSimpleName(), "Button set");
 		
 		/*try {

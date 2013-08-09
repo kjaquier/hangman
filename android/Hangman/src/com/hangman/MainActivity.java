@@ -23,8 +23,15 @@ public class MainActivity extends Activity {
 				GameData data = new GameData();
 				data.setWord("_ _ _ _ _ _ _ _ _ _");
 				data.setNbTries(11);
+				int nbLetters = 'Z' - 'A' + 1;
+				String[] letters = new String[nbLetters];
+				for (int i = 0; i < nbLetters; i++) {
+					letters[i] = String.format("%c", 'A' + i);
+				}
+				data.setLetters(letters);
 				intent.putExtra("game_data", data);
 				startActivity(intent);
+				
 			}
 		});
 	}

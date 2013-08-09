@@ -10,6 +10,7 @@ public class GameData implements Serializable {
 	
 	private String word;
 	private int nbTries;
+	private String[] letters;
 	
     public void read(Scanner in) {
         word = in.nextLine();
@@ -29,6 +30,18 @@ public class GameData implements Serializable {
 
 	public void setNbTries(int nbTries) {
 		this.nbTries = nbTries;
+	}
+
+	public String[] getLetters() {
+		return letters;
+	}
+
+	public void setLetters(String[] letters) {
+		this.letters = letters;
+	}
+
+	public void deleteLetter(String letter) {
+		// TODO Auto-generated method stub
 	}
 	
 }
