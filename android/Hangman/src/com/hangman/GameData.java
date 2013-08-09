@@ -44,4 +44,9 @@ public class GameData implements Serializable {
 		// TODO Auto-generated method stub
 	}
 	
+	@Override
+	public String toString() {
+		return String.format("[%s,%s]", word, nbTries);
+	}
+	
 }
