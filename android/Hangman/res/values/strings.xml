@@ -3,6 +3,11 @@
 
     <string name="app_name">Hangman</string>
     <string name="action_settings">Settings</string>
+    <string name="new_game">New Game</string>
+    <string name="title_activity_playing">PlayingActivity</string>
     <string name="hello_world">Hello world!</string>
+    <string name="word_label">Current word :</string>
+    <string name="nb_tries_label">Remaining tries :</string>
+    <string name="new_try_label">New try</string>
 
 </resources>

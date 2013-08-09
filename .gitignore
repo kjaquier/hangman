@@ -1,0 +1,6 @@
+*.classpath
+*.project
+*.settings
+*.class
+
+android/Hangman/bin/*
