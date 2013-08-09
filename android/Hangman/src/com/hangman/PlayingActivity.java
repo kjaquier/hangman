@@ -29,12 +29,8 @@ public class PlayingActivity extends Activity {
 		
 		// Get data from the previous try
 		Log.d(getClass().getSimpleName(), "Going for a new try");
-		Intent ctx = getIntent();
-		Log.d(getClass().getSimpleName(), "Got the intent");
-		data.setWord(ctx.getStringExtra("word"));
-		Log.d(getClass().getSimpleName(), "Word : " + data.getWord());
-		data.setNbTries(ctx.getIntExtra("nb_tries", 0));
-		Log.d(getClass().getSimpleName(), "Tries : " + data.getNbTries());
+		data = (GameData) getIntent().getSerializableExtra("game_data");
+		Log.d(getClass().getSimpleName(), "Got the data");
 		int nbLetters = 'Z' - 'A' + 1;
 		final String[] letters = new String[nbLetters];
 		for (int i = 0; i < nbLetters; i++) {
@@ -44,6 +40,7 @@ public class PlayingActivity extends Activity {
 		// Update the UI with these data
 		((TextView) findViewById(R.id.current_word)).setText(data.getWord());
 		((TextView) findViewById(R.id.nb_tries)).setText(data.getNbTries());
+		Log.d(getClass().getSimpleName(), "UI updated");
 		
 		class SendRequestTask extends AsyncTask<URL, Void, Void> {
 
@@ -88,8 +85,7 @@ public class PlayingActivity extends Activity {
 								Log.d(getClass().getSimpleName(), "Submitted : " + letters[which]);
 								data.setNbTries(data.getNbTries() - 1);
 								Intent intent = new Intent(PlayingActivity.this, PlayingActivity.class);
-								intent.putExtra("word", "C _ L _ F _ R N _ _");
-								intent.putExtra("nb_tries", data.getNbTries());
+								intent.putExtra("game_data", data);
 								startActivity(intent);
 							}
 							
@@ -104,6 +100,7 @@ public class PlayingActivity extends Activity {
 				letterChoiceDialog.show(PlayingActivity.this.getFragmentManager(), "lettersdialog");
 			}
 		});
+		Log.d(getClass().getSimpleName(), "Button set");
 		
 		/*try {
 			Log.d(getClass().getSimpleName(), "Selected : " + letter);

@@ -20,8 +20,10 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(MainActivity.this, PlayingActivity.class);
-				intent.putExtra("word", "_ _ _ _ _ _ _ _ _ _");
-				intent.putExtra("nb_tries", 11);
+				GameData data = new GameData();
+				data.setWord("_ _ _ _ _ _ _ _ _ _");
+				data.setNbTries(11);
+				intent.putExtra("game_data", data);
 				startActivity(intent);
 			}
 		});
