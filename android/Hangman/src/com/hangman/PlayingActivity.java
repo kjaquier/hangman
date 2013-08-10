@@ -54,8 +54,8 @@ public class PlayingActivity extends Activity {
 		Log.d(getClass().getSimpleName(), "UI updated!");
 		
 		// Set the behaviour of the button that let us submit a new letter
-		Button playBtn = ((Button) findViewById(R.id.playbtn));
-		Log.d(getClass().getSimpleName(), "Got the button");
+		Button playBtn = ((Button) findViewById(R.id.new_try_btn));
+		Log.d(getClass().getSimpleName(), "Got the button : " + playBtn);
 		playBtn.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -98,6 +98,36 @@ public class PlayingActivity extends Activity {
 			Log.e(getClass().toString(), e.getMessage());
 		}*/
 		
+	}
+	
+	@Override
+	public void onBackPressed() {
+		
+		// Set the confirmation dialog
+		AlertDialog.Builder dialog = new AlertDialog.Builder(
+                PlayingActivity.this);
+        dialog.setTitle("Abort");
+        dialog.setMessage("Are you sure you want to go back to the menu?");
+        
+        // Set the "Yes" option
+        dialog.setPositiveButton("Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(PlayingActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    }
+                });
+        
+        // Set the "No" option
+        dialog.setNegativeButton("No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+        
+        // Show the dialog
+        dialog.show();
 	}
 
 	@Override
