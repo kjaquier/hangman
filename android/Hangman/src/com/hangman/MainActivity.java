@@ -16,6 +16,9 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
+/**
+ * Main menu activity
+ */
 public class MainActivity extends Activity {
 
 	private GameData data;
@@ -25,6 +28,10 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		/**
+		 * Request the server for a new game and launch the playing activity
+		 * when it gets the answer
+		 */
 		class StartNewGameTask extends AsyncTask<URL, Void, Void> {
 
 			@Override
@@ -54,6 +61,7 @@ public class MainActivity extends Activity {
 			}
 		}
 
+		// Set the button to request a new game when clicked on
 		((Button) findViewById(R.id.playbtn))
 				.setOnClickListener(new OnClickListener() {
 
@@ -65,9 +73,11 @@ public class MainActivity extends Activity {
 						data.initLetters();
 
 						// Update the UI
-						((TextView) findViewById(R.id.loading_label)).setVisibility(View.VISIBLE);
-						((TextView) findViewById(R.id.playbtn)).setVisibility(View.INVISIBLE);
-						
+						((TextView) findViewById(R.id.loading_label))
+								.setVisibility(View.VISIBLE);
+						((TextView) findViewById(R.id.playbtn))
+								.setVisibility(View.INVISIBLE);
+
 						// Request the server to start a new game
 						try {
 							Log.d(getClass().getSimpleName(),

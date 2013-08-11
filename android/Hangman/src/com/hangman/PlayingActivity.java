@@ -19,8 +19,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+/**
+ * Activity that handles a game. Running from the moment when the server sends
+ * the initial data to when the user finds the whole word or submit his last
+ * letter.
+ */
 public class PlayingActivity extends Activity {
 
+	/**
+	 * Submit a letter to the server, and when it replies, update the game's
+	 * data and updates the UI.
+	 */
 	private class SubmitLetterTask extends AsyncTask<URL, Void, Void> {
 
 		@Override
@@ -50,6 +59,10 @@ public class PlayingActivity extends Activity {
 		}
 	}
 
+	/**
+	 * Shows a dialog to the user to make him select a letter, then runs
+	 * {@link SubmitLetterTask} to submit it.
+	 */
 	private class LetterSubmitter implements View.OnClickListener {
 
 		@Override
@@ -110,7 +123,8 @@ public class PlayingActivity extends Activity {
 		updateUI();
 
 		// Set the behaviour of the button that let us submit a new letter
-		((Button) findViewById(R.id.new_try_btn)).setOnClickListener(new LetterSubmitter());
+		((Button) findViewById(R.id.new_try_btn))
+				.setOnClickListener(new LetterSubmitter());
 
 	}
 
@@ -143,11 +157,22 @@ public class PlayingActivity extends Activity {
 		dialog.show();
 	}
 
+	/**
+	 * Update the informations showed on the UI
+	 */
 	private void updateUI() {
-		((TextView) findViewById(R.id.current_word)).setText(separate(data.getWord()));
-		((TextView) findViewById(R.id.nb_tries)).setText(data.getNbTries() + "");
+		((TextView) findViewById(R.id.current_word)).setText(separate(data
+				.getWord()));
+		((TextView) findViewById(R.id.nb_tries))
+				.setText(data.getNbTries() + "");
 	}
-	
+
+	/**
+	 * @param word
+	 *            A string
+	 * @return The same string with the letters separated by empty spaces. For
+	 *         example : "foobar" => "f o o b a r "
+	 */
 	private String separate(String word) {
 		StringBuilder sb = new StringBuilder();
 		for (char c : word.toCharArray()) {
@@ -157,9 +182,13 @@ public class PlayingActivity extends Activity {
 		return sb.toString();
 	}
 
+	/**
+	 * Shows a dialog and goes back to the menu, when the game ends
+	 */
 	private void onGameEnd() {
-		((TextView) findViewById(R.id.new_try_btn)).setVisibility(View.INVISIBLE);
-		
+		((TextView) findViewById(R.id.new_try_btn))
+				.setVisibility(View.INVISIBLE);
+
 		// Set the message dialog
 		AlertDialog.Builder dialog = new AlertDialog.Builder(
 				PlayingActivity.this);
@@ -174,7 +203,7 @@ public class PlayingActivity extends Activity {
 				startActivity(intent);
 			}
 		});
-		
+
 		// Show the dialog
 		dialog.show();
 	}

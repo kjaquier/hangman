@@ -26,26 +26,23 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f080009;
-        public static final int current_word=0x7f080005;
-        public static final int linearLayout1=0x7f080004;
-        public static final int linearLayout2=0x7f080007;
-        public static final int loading_label=0x7f080000;
-        public static final int nb_tries=0x7f080008;
-        public static final int new_try_btn=0x7f080006;
-        public static final int playbtn=0x7f080003;
-        public static final int textView2=0x7f080001;
-        public static final int textView3=0x7f080002;
+        public static final int action_settings=0x7f080008;
+        public static final int current_word=0x7f080003;
+        public static final int linearLayout1=0x7f080002;
+        public static final int linearLayout2=0x7f080005;
+        public static final int loading_label=0x7f080001;
+        public static final int nb_tries=0x7f080007;
+        public static final int new_try_btn=0x7f080004;
+        public static final int playbtn=0x7f080000;
+        public static final int textView3=0x7f080006;
     }
     public static final class layout {
-        public static final int activity_end=0x7f030000;
-        public static final int activity_main=0x7f030001;
-        public static final int activity_playing=0x7f030002;
+        public static final int activity_main=0x7f030000;
+        public static final int activity_playing=0x7f030001;
     }
     public static final class menu {
-        public static final int end=0x7f070000;
-        public static final int main=0x7f070001;
-        public static final int playing=0x7f070002;
+        public static final int main=0x7f070000;
+        public static final int playing=0x7f070001;
     }
     public static final class string {
         public static final int action_settings=0x7f050001;
