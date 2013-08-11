@@ -24,19 +24,37 @@ Kevin Jaquier
 Application
 -----------
 
-Hangman mobile app, including a web server, a mobile web client (HTML5 with jQuery Mobile) and an Android client.
+Hangman mobile app, including a RESTful Java web server and an Android client.
 
-How to build
-------------
+The server provides the words randomly and handle how the game is running. The client send HTTP request to the server to create a game and to submit a letter, and get the updated game data as a response.
+
+Notes
+-----
+
+* The Web server is using the Servlet technology. 
+* The Android client works on the versions 11 to 17 of the Android SDK. It's been tested using an Android 4.1.2 system.
+
+How to run
+----------
 
 ### Server
 
-To come...
+A running server is available at http://cs13.cs.sjsu.edu:8080/team1.
 
 ### Android client
 
-To come...
+* Make sure the server 
+* Open the Android project in `android/Hangman` with the Eclipse IDE provided with the Android Development Toolkit.
+* Run the project.
 
-### Web client
+How to update
+-------------
 
-To come...
+### Server
+
+* Go in your server directory with a command prompt. (Via git, it's called team1)
+* Update the class files in `./WEB-INF/classes`.
+* Run `jar cvfM team1.war WEB-INF`, it will build a new war with the updated classes.
+* Upload it online with `scp -P 62222 team1.war team1@cs13.cs.sjsu.edu:/opt/domains/domain1/autodeploy`
+* Verify your identity with the received password and it's done.
+* You can now reach the server updated at http://cs13.cs.sjsu.edu:8080/team1 .
