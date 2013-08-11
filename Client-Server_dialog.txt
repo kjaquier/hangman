@@ -1,12 +1,35 @@
 Client-Server dialog
+====================
 
 Client add parameter with a value in their httpRequest (GET).
 Server reponse is just Text, because of the HTTP protocol.
 So it means that client request the server, and then receive a string from the server.
 
-Parameter name		Client(value)					Server response
-----------------------------------------------------------------------------------------
-new					whatever						game-start
-letter				A->Z							number of attempts remaining, if 0,
-													response will be "game-over"
+Format
+------
 
+### Request
+
+Requests to the server are just HTTP GET requests.
+
+There are two parameters :
+
+* `new` : ask the server to create a new game. The value can be anything, it won't be used.
+* `letter` : submit a letter for the current word. A game must already be running. The value is a char from A to Z, and it's not case-sensitive.
+
+A request can be either a *new* request or a *letter* request, not both.
+
+### Response
+
+The server response is always as the following :
+
+	<word>;<state>;<tries>
+	
+where :
+
+* `<word>` is the discovered part of the word in the current game. Undiscovered letters are replaced by an underscore. For example : `FOOBAR` make `_OO_AR` if `F` and `B` are not yet discovered.
+* `<state>` is empty unless the game is starting or finishing. 
+	* `game-start` confirms the game has just been initialized.
+	* `game-over` means the player lost the game by using all his tries.
+	* `you-win` means the player has found the word and the game is over.
+* `<tries>` is the number of remaining tries. A try reprensents the submitting of one letter.
