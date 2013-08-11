@@ -13,7 +13,9 @@ public class GameData implements Serializable {
 	private String[] letters;
 	
     public void read(Scanner in) {
-        word = in.nextLine();
+        String[] line = in.nextLine().split(";");
+        word = line[0];
+        nbTries = Integer.parseInt(line[1]);
     }
 	
 	public String getWord() {
