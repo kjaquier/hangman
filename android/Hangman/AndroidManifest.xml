@@ -28,6 +28,10 @@
             android:name="com.hangman.PlayingActivity"
             android:label="@string/title_activity_playing" >
         </activity>
+        <activity
+            android:name="com.hangman.EndActivity"
+            android:label="@string/title_activity_end" >
+        </activity>
     </application>
 
 </manifest>

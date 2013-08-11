@@ -9,5 +9,7 @@
     <string name="word_label">Current word :</string>
     <string name="nb_tries_label">Remaining tries :</string>
     <string name="new_try_label">New try</string>
+    <string name="title_activity_end">EndActivity</string>
+    <string name="loading">Loading data...</string>
 
 </resources>
