@@ -19,6 +19,7 @@ public class Server extends HttpServlet {
 	private String state;
 	// Number of attempts left
 	private int attemptLeft;
+	private Random rand = new Random();
 
 	private LinkedList<String> wordList = new LinkedList<String>();
 
@@ -28,8 +29,14 @@ public class Server extends HttpServlet {
 		wordList.add("DEPARTMENT");
 		wordList.add("PLATYPUS");
 		wordList.add("CHEESEBURGER");
-		wordList.add("UNBEATABlE");
+		wordList.add("UNBEATABLE");
 		wordList.add("VOCABULARY");
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		this.doGet(req, resp);
 	}
 
 	// Get method
@@ -49,25 +56,30 @@ public class Server extends HttpServlet {
 		// Get the letter parameter and handle it
 		String letter = (String) request.getParameter("letter");
 		if (letter != null) {
+			letter = letter.toUpperCase();
 			// Check if a game was created first
 			if (word != null) {
-
 				// Check if there is still some attempt left
 				if (attemptLeft > 0) {
 					if (word.contains(letter)) {
-
 						// Update the state of the guessed word
 						for (int i = 0; i < word.length(); i++) {
-							if (word.charAt(i) == letter.charAt(0)) {
-								state.toCharArray()[i] = letter.charAt(0);
+							if (word.charAt(i) == letter.toCharArray()[0]) {
+								char[] tmp = state.toCharArray();
+								tmp[i] = letter.toCharArray()[0];
+								state = String.copyValueOf(tmp);
 							}
 						}
 					} else {
 						attemptLeft--;
 					}
-					out.write(attemptLeft);
+					if (state.equals(word)) {
+						out.write(state+";you-win;" + attemptLeft);
+					} else {
+						out.write(state + ";;" + attemptLeft);
+					}
 				} else {
-					out.write("game-over");
+					out.write(word+";game-over;"+attemptLeft);
 				}
 			}
 		}
@@ -75,17 +87,16 @@ public class Server extends HttpServlet {
 		// Get the new parameter and handle it
 		String newGame = (String) request.getParameter("new");
 		if (newGame != null) {
-			Random rand = new Random();
 			int index = rand.nextInt(wordList.size());
 			word = wordList.get(index);
+			attemptLeft = 11;
 			state = "";
 			// Initialisation of the current state (empty word)
-			for (int i = 0; i < word.length(); i++)
+			for (int i = 0; i < word.length(); i++) {
 				state += "_";
-
-			out.write("game-start");
+			}
+			out.write(state + ";game-start;" + attemptLeft);
 		}
-
 		out.close();
 	}
 }
