@@ -26,11 +26,13 @@ Application
 
 Hangman mobile app, including a RESTful Java web server and an Android client.
 
+The server provides the words randomly and handle how the game is running. The client send HTTP request to the server to create a game and to submit a letter, and get the updated game data as a response.
+
 Notes
 -----
 
 * The Web server is using the Servlet technology. 
-* The Android client is target the versions 11 to 17 of the Android SDK. It's been tested using an Android 4.1.2 system.
+* The Android client works on the versions 11 to 17 of the Android SDK. It's been tested using an Android 4.1.2 system.
 
 How to run
 ----------
