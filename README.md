@@ -38,11 +38,11 @@ How to build
 ### Server
 
 * Copy the `server_hangman/doc_server/hangman` directory in the usual web apps folder of your Web server (`webapps` for Tomcat).
-* Start your Web server
+* Start your Web server.
 
 A running server is available at http://cs13.cs.sjsu.edu:8080/team1.
 
 ### Android client
 
-* Open the Android project in `android/Hangman` with ADT
-* Run
+* Open the Android project in `android/Hangman` with the Eclipse IDE provided with the Android Development Toolkit.
+* Run the project.
