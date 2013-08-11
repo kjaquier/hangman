@@ -32,8 +32,8 @@ Notes
 * The Web server is using the Servlet technology. 
 * The Android client is target the versions 11 to 17 of the Android SDK. It's been tested using an Android 4.1.2 system.
 
-How to build
-------------
+How to run
+----------
 
 ### Server
 
